@@ -9,7 +9,7 @@ register = template.Library()
 
 re_twitter = re.compile(r"(@(.+?\b))")
 sub_twitter =  r'<a href="http://twitter.com/\2">\1</a>'
-re_link = re.compile(r"(http.*)\s*")
+re_link = re.compile(r"(http.*?)\s*")
 sub_link = r'<a href="\1">\1</a>'
 
 def linkify(value):

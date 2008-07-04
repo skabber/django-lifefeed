@@ -1,12 +1,8 @@
+{% extends "lf_base.html" %}
 {% load lifefeed %}
-{% for item in items|slice:":10" %}
-		<div class="{{ item.service.name|slugify }} outer">
-        	<div>
-				<a href="{{ item.link }}"><img src="{{ item.service.iconUrl}}"/></a>
-        		{{ item.published|timesince }} ago
-        	</div>
-			<div class="inner">
-        		{{ item.title|linkify }}
-			</div>
-        </div>
-{% endfor %}
+{% block content %}
+	{% if item.media %}
+		<img src="{{ item.media.0.thumbnails.0.url }}"/>
+	{% endif %}
+	{{ item.title|linkify }}
+{% endblock %}

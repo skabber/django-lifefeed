@@ -1,0 +1,21 @@
+{% load lifefeed %}
+<div class="{{ item.service.name|slugify }} outer">
+	<div>
+		<a href="{{ item.link }}"><img src="{{ item.service.iconUrl}}"/></a>
+		{{ item.published|timesince }} ago
+	</div>
+		<div class="inner">
+			{% block content %}{% endblock %}
+			{% if item.comments %}
+				<p/>
+				<a href="javascript:toggle('comments_{{ item.id }}');">Comments: ({{ item.comments|length }})</a>
+				<div class="ff_comments" id="comments_{{ item.id }}" style="display: none;">
+				<ul>
+				{% for comment in item.comments %}
+				<li>{{ comment.body|truncatewords:10|linkify }}</li>
+				{% endfor %}
+				</ul>
+				</div>
+			{% endif %}
+		</div>
+</div>

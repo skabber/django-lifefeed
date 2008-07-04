@@ -1,0 +1,10 @@
+{% extends "lf_base.html" %}
+{% load lifefeed %}
+{% block content %}
+	{% if googleMapsKey %}
+		<a href="{{ item.link }}">
+			<img src="http://maps.google.com/staticmap?center={{ item.geo.lat }},{{ item.geo.long }}&markers={{ item.geo.lat }},{{ item.geo.long }},blue&zoom=14&size=200x100&key={{ googleMapsKey }}"/>
+		</a>
+	{% endif %}
+	{{ item.title|linkify }}
+{% endblock %}

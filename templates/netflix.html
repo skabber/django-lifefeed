@@ -1,0 +1,7 @@
+{% extends "lf_base.html" %}
+{% load lifefeed %}
+{% block content %}
+		<a href="{{ item.link }}"><img src="{{ item.media.0.thumbnails.0.url }}"/></a>
+		<a href="http://www.netflix.com/AddToQueue?movieid={{ item.netflixId }}">Add to your Queue!</a>
+		{{ item.title|linkify }}
+{% endblock %}

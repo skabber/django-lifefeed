@@ -26,7 +26,7 @@ def addExtraData(item):
     """
     adds some extra data to the item json
     """
-    if item['service']['id'] == 'netflix':
+    if item['via']['name'] == 'netflix':
         item['netflixId'] = re.match(netflix_re, item['link']).groups()[0]
 
 def linkify(value):
@@ -38,12 +38,12 @@ def linkify(value):
     return mark_safe(force_unicode(smart_str(value)))
 
 def lifefeed(username, n=20):
-    stream = FriendFeed().fetch_user_feed(username)
+    stream = FriendFeed().fetch_feed(username)
     html = ""
     items = stream["entries"][:n]
     for item in items:
         addExtraData(item)
-        t = loader.select_template(("%s.html" % item['service']['id'], DEFAULT_TEMPLATE))
+        t = loader.select_template(("%s.html" % item['via']['name'], DEFAULT_TEMPLATE))
         c = Context({'item': item, 'googleMapsKey': googleMapsKey})
         html += t.render(c)
     return html
